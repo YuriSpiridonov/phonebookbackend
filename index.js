@@ -1,6 +1,8 @@
 const express = require('express')
 const app = express()
 
+app.use(express.json())
+
 let phonebook = [
     { 
         "id": 1,
@@ -23,6 +25,10 @@ let phonebook = [
         "number": "39-23-6423122"
       }
 ]
+
+const generateId = () => (
+    Math.random().toString().slice(2, 15) + Math.random().toString().slice(2, 15)
+)
 
 app.get('/', (request, response) => {
     response.send(
@@ -60,6 +66,26 @@ app.get('/info', (request, response) => {
             <p>${currentDate}</p>
         </div>`
     )
+})
+
+app.post('/api/persons', (request, response) => {
+    const person = request.body
+    console.log(person)
+    if (!person.name || !person.number) {
+        return response.status(400).json({
+            error: 'content is missing'
+          })
+    }
+
+    const contact = {
+        name: person.name,
+        number: person.number,
+        id: generateId(),
+    }
+
+    phonebook = phonebook.concat(contact)
+
+    response.json(contact)
 })
 
 app.delete('/api/persons/:id', (request, response) => {
