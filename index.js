@@ -73,7 +73,11 @@ app.post('/api/persons', (request, response) => {
     console.log(person)
     if (!person.name || !person.number) {
         return response.status(400).json({
-            error: 'content is missing'
+            error: 'The name or number is missing'
+          })
+    } else if (phonebook.find(entrie => entrie.name === person.name)) {
+        return response.status(400).json({
+            error: 'Name must be unique'
           })
     }
 
