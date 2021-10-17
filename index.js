@@ -1,8 +1,9 @@
+const { request } = require('express')
 const express = require('express')
 const morgan = require('morgan')
 const app = express()
 
-app.use(morgan('tiny'))
+app.use(morgan(':method :url :status :res[content-length] - :response-time ms :content'))
 app.use(express.json())
 
 let phonebook = [
@@ -27,6 +28,12 @@ let phonebook = [
         "number": "39-23-6423122"
       }
 ]
+
+morgan.token('content', (request) => 
+    request.method === 'POST' && request.body.name
+        ? JSON.stringify(request.body) 
+        : null 
+)
 
 const generateId = () => (
     Math.random().toString().slice(2, 15) + Math.random().toString().slice(2, 15)
