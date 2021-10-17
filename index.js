@@ -1,6 +1,8 @@
 const express = require('express')
+const morgan = require('morgan')
 const app = express()
 
+app.use(morgan('tiny'))
 app.use(express.json())
 
 let phonebook = [
@@ -70,7 +72,6 @@ app.get('/info', (request, response) => {
 
 app.post('/api/persons', (request, response) => {
     const person = request.body
-    console.log(person)
     if (!person.name || !person.number) {
         return response.status(400).json({
             error: 'The name or number is missing'
