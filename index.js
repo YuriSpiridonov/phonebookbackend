@@ -6,6 +6,7 @@ const app = express()
 
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :content'))
 app.use(express.json())
+app.use(express.static('build'))
 app.use(cors())
 
 let phonebook = [
@@ -45,10 +46,11 @@ app.get('/', (request, response) => {
     response.send(
         `<h1>
             Go to the proper 
-            <a href="http://localhost:3001/api/persons">page</a>
+            <a href="/api/persons">page</a>
             or check 
-            <a href="http://localhost:3001/info">info</a>.
-        </h1>`)
+            <a href="/info">info</a>.
+        </h1>`
+    )
 })
 
 app.get('/api/persons', (request, response) => {
