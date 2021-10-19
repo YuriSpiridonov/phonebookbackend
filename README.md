@@ -1,1 +1,5 @@
-# Exercises 3.1.-3.9.
+# Exercises 3.1.-3.11.
+
+Readme will be fulfilled later.
+
+The App can be found [here](https://phonebook6.herokuapp.com/).
