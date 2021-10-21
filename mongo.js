@@ -6,8 +6,6 @@ if (process.argv.length < 3) {
 }
 
 const password = process.argv[2]
-// const personName = process.argv[3]
-// const number = process.argv[4]
 
 const url =
   `mongodb+srv://phonebook:${password}@cluster0.gpp3t.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
@@ -21,11 +19,8 @@ const personSchema = new mongoose.Schema({
 
 const Person = mongoose.model('Person', personSchema)
 if (process.argv.length > 4) {
-// if (personName && number) {
   //add entries to the phonebook DB
   const person = new Person({
-    // personName: personName,
-    // number: number,
     personName: process.argv[3],
     number: process.argv[4],
   })
