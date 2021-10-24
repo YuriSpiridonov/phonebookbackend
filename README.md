@@ -1,4 +1,4 @@
-# Exercises 3.1.-3.12.
+# Exercises 3.1.-3.18.
 
 Readme will be fulfilled later.
 
