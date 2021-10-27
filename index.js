@@ -58,11 +58,11 @@ app.get('/info', (request, response) => {
 app.post('/api/persons', (request, response, next) => {
     const body = request.body
     
-    if (!body.name || !body.number) {
-        return response.status(400).json({
-            error: 'The name or number is missing'
-          })
-    }
+    // if (!body.name || !body.number) {
+    //     return response.status(400).json({
+    //         error: 'The name or number is missing'
+    //       })
+    // }
 
     const contact = new Person ({
         name: body.name,
@@ -72,7 +72,7 @@ app.post('/api/persons', (request, response, next) => {
     contact
         .save()
         .then(savedPerson => {
-            response.json(savedPerson)
+            response.json(savedPerson.toJSON())
         })
         .catch(error => next(error))
 })
@@ -113,6 +113,9 @@ const errorHandler = (error, request, response, next) => {
 
     if (error.name === 'CastError') {
         return response.status(400).send({ error: 'malformatted id' })
+    } else if (error.name === 'ValidationError') {
+        return response.status(400).json({ error: error.message })
+        
     }
 
     next(error)
