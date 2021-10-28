@@ -57,12 +57,6 @@ app.get('/info', (request, response) => {
 
 app.post('/api/persons', (request, response, next) => {
     const body = request.body
-    
-    // if (!body.name || !body.number) {
-    //     return response.status(400).json({
-    //         error: 'The name or number is missing'
-    //       })
-    // }
 
     const contact = new Person ({
         name: body.name,
